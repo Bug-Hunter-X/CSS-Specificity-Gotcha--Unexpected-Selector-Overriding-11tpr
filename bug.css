@@ -1,0 +1,22 @@
+The following CSS code snippet demonstrates an uncommon error related to the specificity of CSS selectors.  The problem lies in understanding how the browser determines which styles to apply when multiple selectors target the same element. 
+
+```css
+.container {
+  background-color: lightblue;
+}
+
+.container .item {
+  background-color: lightgreen;
+}
+
+.container .item.special {
+  background-color: lightpink; /* This rule is intended to override the previous one, but doesn't always */
+}
+
+.item {
+  background-color: yellow; /* This rule unexpectedly overrides .container .item.special in some cases */
+}
+
+```
+
+This might unexpectedly result in `.item.special` elements having a yellow background instead of the expected lightpink. This occurs because the specificity of the `.item` selector unexpectedly wins out sometimes over the `.container .item.special` selector, even if the latter is more precise for this element. 
